@@ -15,6 +15,8 @@
 #include <Arduino.h>
 
 
+HardwareSerial* serial;
+
 
 const int wake_up = 2;
 const int reset = 3;
@@ -60,7 +62,7 @@ static void _putchars(const unsigned char * ptr, int n)
 	for(i = 0; i < n; i++)
 	{
 	    x = ptr[i];
-		Serial.write(x);
+		serial->write(x);
 	}
 }
 /*******************************************************************************
@@ -96,9 +98,10 @@ static unsigned char _verify(const void * ptr, int n)
 * Return         : 
 * Attention		   : None
 *******************************************************************************/
-void epd_init(void)
+void epd_init(HardwareSerial* ser)
 {
-	Serial.begin(115200);
+    serial = ser;
+	serial->begin(115200);
 	pinMode(wake_up, HIGH);
 	pinMode(reset, HIGH);
 }
@@ -183,7 +186,7 @@ void epd_set_baud(long baud)
 	_putchars(_cmd_buff, 13);	
 	
 	delay(10);	
-	Serial.begin(baud);
+	serial->begin(baud);
 }
 /*******************************************************************************
 * Function Name  : void epd_read_baud(void)

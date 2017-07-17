@@ -91,8 +91,10 @@ set screen rotation
 #define    EPD_NORMAL                         0                                                        //screen normal
 #define    EPD_INVERSION                      1                                                        //screen inversion      
 
+#include <Arduino.h>
 
-void epd_init(void);
+
+void epd_init(HardwareSerial* ser);
 void epd_reset(void);
 void epd_wakeup(void);
 

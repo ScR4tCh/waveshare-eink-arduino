@@ -173,7 +173,7 @@ void setup(void)
   pinMode(led, OUTPUT);
   digitalWrite(led, LOW);
   
-  epd_init();
+  epd_init(Serial);
   epd_wakeup();
   epd_set_memory(MEM_NAND);
 }
